@@ -1,27 +1,27 @@
-// Dieses Event wird ausgelöst, sobald das DOM vollständig geladen ist.
+// Wenn das DOM vollständig lädt, wird dieses Event ausgelöst.
 document.addEventListener('DOMContentLoaded', (event) => {
-    // Hole alle Elemente mit der Klasse 'kanban-card'.
+    // Hol alle Elemente mit der Klasse 'kanban-card'.
     const cards = document.querySelectorAll('.kanban-card');
-    // Hole alle Elemente mit der Klasse 'kanban-column'.
+    // Hol alle Elemente mit der Klasse 'kanban-column'.
     const columns = document.querySelectorAll('.kanban-column');
 
-    // Füge jedem Karten-Element Event-Listener für Drag-Start und Drag-End hinzu.
+    // Füg jedem Karten-Element Event-Listener für Drag-Start und Drag-End hinzu.
     cards.forEach(card => {
         card.addEventListener('dragstart', dragStart);
         card.addEventListener('dragend', dragEnd);
     });
 
-    // Definiert, was beim Start des Ziehens passieren soll.
+    // Das definiert, was beim Start des Ziehens passieren soll.
     function dragStart(e) {
         // Setzt die übertragene Datenart und den Wert (hier die ID der Karte).
         e.dataTransfer.setData('text/plain', e.target.id);
-        // Kurz verzögert, um die Karte zu verstecken, damit sie nicht direkt unter dem Cursor erscheint.
+        // Extra kurz verzögert, um die Karte zu verstecken, damit sie nicht direkt unter dem Cursor erscheint.
         setTimeout(() => {
             e.target.classList.add('hide');
         }, 0);
     }
 
-    // Definiert, was geschieht, wenn das Ziehen (Drag) beendet wird.
+    // Es definiert, was geschieht, wenn das Ziehen (Drag) beendet wird.
     function dragEnd(e) {
         // Entfernt die Klasse 'hide', um die Karte wieder anzuzeigen.
         e.target.classList.remove('hide');
